@@ -1,14 +1,27 @@
 {
-    "spring": [
-        "Flowers", "Blossoming"
-    ],
-    "summer": [
-        "Sea", "Ice Cream"
-    ],
-    "autumn": [
-        "Leafs falling", "Chestnut"
-    ],
-    "winter": [
-        "Snow Man", "Skiing"
-    ]
+	"words": [{
+			"Flowers": "spring"
+		},
+		{
+			"Blossoming": "spring"
+		},
+		{
+			"Sea": "summer"
+		},
+		{
+			"Ice Cream": "summer"
+		},
+		{
+			"Leafs falling": "autumn"
+		},
+		{
+			"Chestnut": "autumn"
+		},
+		{
+			"Snow Man": "winter"
+		},
+		{
+			"Skiing": "winter"
+		}
+	]
 }
