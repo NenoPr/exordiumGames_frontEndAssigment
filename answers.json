@@ -1,0 +1,14 @@
+{
+    "spring": [
+        "Flowers", "Blossoming"
+    ],
+    "summer": [
+        "Sea", "Ice Cream"
+    ],
+    "autumn": [
+        "Leafs falling", "Chestnut"
+    ],
+    "winter": [
+        "Snow Man", "Skiing"
+    ]
+}
