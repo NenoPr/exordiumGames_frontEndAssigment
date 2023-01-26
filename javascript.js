@@ -1,52 +1,45 @@
 jQuery.noConflict();
 jQuery(document).ready(function ($) {
-  // $("button").on("click", function () {
-  //   $(".answer-option").toggleClass("test");
-  // });
+  // VARIABLES
+  let showAnswersCounter = 0;
+  let wrongAnswer = false;
 
   // IMPORT WORDS FOR THE GAME
-  // shuffle(JSON_WORDS);
+  $.ajax({
+    type: "GET",
+    url: "answers.json",
+    success: function (response) {
+      console.log(response);
+      let answers = response.words;
+      shuffle(answers);
+      console.log(answers);
+      $(answers).each(function (index, data) {
+        console.log(data);
+        console.log(data.season);
+        console.log(data.word);
+        $(".possible-answers").append(
+          $(
+            `<div class="answer-option" data-season="${data.season}">${data.word}</div>`
+          ).on("mousedown", StickElement)
+        );
+      });
+    },
+  });
 
-  // let name = $.parseJSON(data)
-  // console.log(name)
-
-
-  // $.getJSON("answers.json", function (data) {
-  //   let items = [];
-  //   console.log(data);
-  //   $.each(data, function (key, value) {
-  //     items.push(
-  //       `<div class="answer-option" data-season="${key}">${value}</div>`
-  //     );
-  //   });
-  //   shuffle(items);
-  //   $.each(items, function (item) {
-  //     $(".possible-answers").append(item);
-  //   });
-  // }).fail(function () {
-  //   console.log("An error has occurred.");
-  // });
-
-  // $(JSON_WORDS).each(function (key, value) {
-  //   // $(".possible-answers").append(
-  //   //   `<div class="answer-option" data-season="${value}">${key}</div>`
-  //   // );
-  //   console.log(key, value)
-  // });
-
-  let showAnswersCounter = 0;
   //        ---- EVENTS ----
-  $(".answer-option").on("mousedown", StickElement);
+
+  // Deprecated
+  //$(".answer-option").on("mousedown", StickElement);
 
   //- ANSWER BOX EVENTS -
 
   // Append answer element to the box on mouseup event over it
   $(".answer-box").on("mouseup", function (e) {
     if (!$(".sticky").hasClass("sticky")) return;
-    if ($(this).hasClass("answer-option")) return;
+    if (!$(this).hasClass("answer-box")) return;
     // Add class to drop the element later
     $(".sticky").addClass("dropped");
-    let elem = $(".sticky").clone().removeClass("sticky");
+    let elem = $(".sticky").clone().removeClass("sticky dropped");
     $(this).append($(elem).on("mousedown", StickElement));
   });
 
@@ -86,17 +79,20 @@ jQuery(document).ready(function ($) {
   // Confirm Choices
   // Checks if the answers are in the correct boxes
   $(".confirm-selection").on("click", function () {
+    wrongAnswer = false;
     $(".answer-option").each(CheckCorrectAnswers);
-    showAnswersCounter++;
+    if (wrongAnswer) showAnswersCounter++;
     if (showAnswersCounter > 1) {
       $(".show-answers").css("visibility", "visible");
       $(".show-answers").css("opacity", "1");
+      showAnswersCounter = 0;
     }
   });
 
   // Show Answers
   // Places the answers in their correct box elements
   $(".show-answers").on("click", function () {
+    wrongAnswer = false;
     $(".answer-box").each(function () {
       let box = $(this);
       $(".answer-option")
@@ -110,17 +106,31 @@ jQuery(document).ready(function ($) {
     });
   });
 
+  // CHANGE THEMES
+
+  $(".theme-container").on("change", function() {
+    if ($(this).find(":selected").text() === "Theme 2") {
+      $("body").get(0).style.setProperty("--primary", "rgb(63, 207, 152)");
+      $("body").get(0).style.setProperty("--secondary", "rgb(81, 246, 152)");
+      $("body").get(0).style.setProperty("--highlight", "rgb(245, 255, 250)");
+    } else {
+      $("body").get(0).style.setProperty("--primary", "rgb(253, 178, 89)");
+      $("body").get(0).style.setProperty("--secondary", "rgb(230, 172, 96)");
+      $("body").get(0).style.setProperty("--highlight", "rgb(248, 243, 199)");
+    }
+    console.log("hello")
+  })
+
   //        ---- FUNCTIONS ----
 
   function CheckCorrectAnswers() {
     if ($(this).data("season") === $(this).parent().data("season")) {
       $(this).removeClass("wrong-color");
       $(this).addClass("correct-color");
-      console.log(true);
     } else {
       $(this).removeClass("correct-color");
       $(this).addClass("wrong-color");
-      console.log(false);
+      wrongAnswer = true;
     }
   }
 

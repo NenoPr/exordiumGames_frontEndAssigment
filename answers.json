@@ -1,27 +1,35 @@
 {
 	"words": [{
-			"Flowers": "spring"
+			"season": "spring",
+			"word": "Flowers"
 		},
 		{
-			"Blossoming": "spring"
+			"season": "spring",
+			"word": "Blossoming"
 		},
 		{
-			"Sea": "summer"
+			"season": "summer",
+			"word": "Sea"
 		},
 		{
-			"Ice Cream": "summer"
+			"season": "summer",
+			"word": "Ice Cream"
 		},
 		{
-			"Leafs falling": "autumn"
+			"season": "autumn",
+			"word": "Leafs falling"
 		},
 		{
-			"Chestnut": "autumn"
+			"season": "autumn",
+			"word": "Chestnut"
 		},
 		{
-			"Snow Man": "winter"
+			"season": "winter",
+			"word": "Snow Man"
 		},
 		{
-			"Skiing": "winter"
+			"season": "winter",
+			"word": "Skiing"
 		}
 	]
 }

@@ -7,42 +7,58 @@
     <title>Document</title>
     <script src="jquery-3.6.1.min.js" type="text/javascript"></script>
     <script src="javascript.js" type="text/javascript"></script>
+    <link rel="stylesheet" href="responsive.css" />
     <link rel="stylesheet" href="stylesheet.css" />
     <link rel="stylesheet" href="scroll.css" />
     <link rel="stylesheet" href="images.css" />
   </head>
   <body>
     <div class="main-container">
+      <div class="visual-theme-change">
+        <select class="theme-container">
+          <option class="theme-one">Theme 1</option>
+          <option class="theme-two">Theme 2</option>
+        </select>
+      </div>
       <div class="seasons-answers-container">
-        <div class="seasons-container">
+        <div class="answers-container">
           <div class="season spring">Spring</div>
-          <div class="season summer">Summer</div>
-          <div class="season autumn">Autumn</div>
-          <div class="season winter">Winter</div>
+          <div class="answer-box spring-season" data-season="spring"></div>
         </div>
         <div class="answers-container">
+          <div class="season summer">Summer</div>
+          <div class="answer-box summer-season" data-season="summer"></div>
+        </div>
+        <div class="answers-container">
+          <div class="season autumn">Autumn</div>
+          <div class="answer-box autumn-season" data-season="autumn"></div>
+        </div>
+        <div class="answers-container">
+          <div class="season winter">Winter</div>
+          <div class="answer-box winter-season" data-season="winter"></div>
+        </div>
+        <!-- <div class="answers-container">
           <div class="answer-box spring-season" data-season="spring"></div>
           <div class="answer-box summer-season" data-season="summer"></div>
           <div class="answer-box autumn-season" data-season="autumn"></div>
           <div class="answer-box winter-season" data-season="winter"></div>
-        </div>
+        </div> -->
       </div>
       <div class="possible-answers">
-        <div class="answer-option" data-season="spring">Flowers</div>
+        <!-- <div class="answer-option" data-season="spring">Flowers</div>
         <div class="answer-option" data-season="spring">Blossoming</div>
         <div class="answer-option" data-season="summer">Sea</div>
         <div class="answer-option" data-season="summer">Ice Cream</div>
         <div class="answer-option" data-season="autumn">Leafs falling</div>
         <div class="answer-option" data-season="autumn">Chestnut</div>
         <div class="answer-option" data-season="winter">Snow Man</div>
-        <div class="answer-option" data-season="winter">Skiing</div>
+        <div class="answer-option" data-season="winter">Skiing</div> -->
       </div>
       <div class="actions-container">
         <div class="confirm-selection action">✔️</div>
         <div class="show-answers action">Show Answers</div>
         <div class="refresh-answers action">↻</div>
       </div>
-      <button>Press Me!</button>
     </div>
   </body>
 </html>
