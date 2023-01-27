@@ -1,0 +1,25 @@
+.spring {
+    background-image: url("../public/images/spring.jpg");
+    color: green;
+}
+
+.summer {
+    background-image: url("../public/images/summer2.jpg");
+    color: yellow;
+}
+
+.autumn {
+    background-image: url("../public/images/autumn.jpg");
+    color: brown;
+}
+
+.winter {
+    background-image: url("../public/images/winter.jpg");
+    color: blue;
+}
+
+.season {
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+}

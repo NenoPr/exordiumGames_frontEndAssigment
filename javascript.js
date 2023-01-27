@@ -109,7 +109,7 @@ jQuery(document).ready(function ($) {
   // CHANGE THEMES
 
   $(".theme-container").on("change", function() {
-    if ($(this).find(":selected").text() === "Theme 2") {
+    if ($(this).find(":selected").val() === "Theme-2") {
       $("body").get(0).style.setProperty("--primary", "rgb(63, 207, 152)");
       $("body").get(0).style.setProperty("--secondary", "rgb(81, 246, 152)");
       $("body").get(0).style.setProperty("--highlight", "rgb(245, 255, 250)");
