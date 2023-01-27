@@ -12,7 +12,7 @@
   <body>
     <div class="main-container">
       <div class="header">
-        <div>Game Index</div>
+        <div class="site-name">Game Index</div>
       </div>
       <div class="content-container">
         <div class="display-options">
@@ -21,41 +21,30 @@
               Filter Games by Name:
             </label>
             <input type="text" name="search-box" />
+            <button>Search</button>
             <div class="reset-filter"></div>
           </div>
           <div class="filter-options">
             <div class="genre-box-container box-container">
-              <div class="genre-box select-box">
-                Genre
-              </div>
-              <div id="genre-checkboxes" class="checkboxes">
-                <label for="genre-one">
-                  <input type="checkbox" id="genre-one" class="genre-checkbox" />First checkbox</label>
-                <label for="genre-two">
-                  <input type="checkbox" id="genre-two" class="genre-checkbox"/>Second checkbox</label>
-                <label for="genre-three">
-                  <input type="checkbox" id="genre-three" class="genre-checkbox"/>Third checkbox</label>
-              </div>
-            </div>
+              <div class="genre-box select-box">Genre</div>
+              <div id="genre-checkboxes" class="checkboxes"></div>
             </div>
             <div class="style-box-container box-container">
-              <div class="style-box select-box">
-                Style
-              </div>
-              <div id="style-checkboxes" class="checkboxes">
-                <label for="style-one">
-                  <input type="checkbox" class="style-checkbox" id="style-one" />First checkbox</label>
-                <label for="style-two">
-                  <input type="checkbox" class="style-checkbox" id="style-two" />Second checkbox</label>
-                <label for="style-three">
-                  <input type="checkbox" class="style-checkbox" id="style-three" />Third checkbox</label>
-              </div>
+              <div class="style-box select-box">Style</div>
+              <div id="style-checkboxes" class="checkboxes"></div>
             </div>
+            <button class="reset-filters">Reset filters</button>
+            <select name="dataset" id="dataset-id" class="dataset-select">
+              <option value="dataset1">Dataset 1</option>
+              <option value="dataset2">Dataset 2</option>
+            </select>
           </div>
         </div>
-        <div class="games-container"></div>
       </div>
-      <div class="footer"></div>
+      <div class="games-container"></div>
+      <footer class="footer">
+        <div class="site-name">Game Index</div>
+      </footer>
     </div>
   </body>
 </html>

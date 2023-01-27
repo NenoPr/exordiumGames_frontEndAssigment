@@ -118,7 +118,6 @@ jQuery(document).ready(function ($) {
       $("body").get(0).style.setProperty("--secondary", "rgb(230, 172, 96)");
       $("body").get(0).style.setProperty("--highlight", "rgb(248, 243, 199)");
     }
-    console.log("hello")
   })
 
   //        ---- FUNCTIONS ----
