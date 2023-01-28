@@ -29,6 +29,7 @@
   justify-self: center;
   height: 30vh;
 }
+
 p {
   text-align: center;
 }
@@ -301,8 +302,7 @@ select {
 }
 
 .sticky {
-  position: fixed; /* Floating above */
-  transition: position 0.23s; /* Sticking effect */
-  pointer-events: none; /* Allow clicking trough the div */
+  position: fixed;
+  pointer-events: none;
   z-index: 10;
 }

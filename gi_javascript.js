@@ -12,7 +12,6 @@ jQuery(document).ready(function ($) {
       type: "GET",
       url: datasetUrl,
       success: function (response) {
-        // console.log(response);
         responseData = response;
         let responseGenres = [];
         let responseStyles = [];
@@ -110,30 +109,6 @@ jQuery(document).ready(function ($) {
     );
   }
 
-  // function ApplyFilter(rData, fData) {
-  //   // Empty the element to append new children
-  //   $(".games-container").empty();
-  //   // Populate .games-container with new games
-  //   $.each(rData, function (key, val) {
-  //     $(".games-container").append(
-  //       `<div class="game-container">
-  //           <img class="game-image-url" src="https://exordiumgames.com/jobs/frontend/${val.url}"/>
-  //           <div class="game-info">
-  //             <div class="game-name">${key}</div>
-  //             <div class="game-info-holder">
-  //               <div class="game-info-type">Genre:</div>
-  //               <div class="game-genre"> ${val.genre}</div>
-  //             </div>
-  //             <div class="game-info-holder">
-  //               <div class="game-info-type">Style:</div>
-  //               <div class="game-style">${val.style}</div>
-  //             </div>
-  //           </div>
-  //         </div>`
-  //     );
-  //   });
-  // }
-
   //              ---- EVENTS ----
 
   // Search checkboxes events
@@ -198,7 +173,6 @@ jQuery(document).ready(function ($) {
         genreExpanded = true;
         $("#style-checkboxes").css("display", "none");
         styleExpanded = false;
-        // console.log($._data(document.querySelector("body"), "events"));
       } else {
         $._data(document.querySelector("body"), "events").click.forEach(
           (element) => {
@@ -222,17 +196,16 @@ jQuery(document).ready(function ($) {
     let applyStyling = false;
     $(".genre-checkbox").each(function () {
       if ($(this).is(":checked")) {
-        applyStyling = true
+        applyStyling = true;
         if (!$(".genre-box").hasClass("filter-selected"))
           $(".genre-box").toggleClass("filter-selected");
       }
     });
-    if (!applyStyling) $(".genre-box").removeClass("filter-selected")
+    if (!applyStyling) $(".genre-box").removeClass("filter-selected");
   }
 
   // Toggles the body event that closes the genre list if a user clicks outside of it
   function bodyGenreCheckboxToggle(e) {
-    // console.log(e.target);
     if ($(e.target).hasClass("genre-box")) return;
     else if ($(e.target).hasClass("genre-checkbox")) return;
     else if ($(e.target).hasClass("checkbox-label")) return;
@@ -268,7 +241,6 @@ jQuery(document).ready(function ($) {
         styleExpanded = true;
         $("#genre-checkboxes").css("display", "none");
         genreExpanded = false;
-        // console.log($._data(document.querySelector("body"), "events"));
       } else {
         $._data(document.querySelector("body"), "events").click.forEach(
           (element) => {
@@ -292,12 +264,12 @@ jQuery(document).ready(function ($) {
     let applyStyling = false;
     $(".style-checkbox").each(function () {
       if ($(this).is(":checked")) {
-        applyStyling = true
+        applyStyling = true;
         if (!$(".style-box").hasClass("filter-selected"))
           $(".style-box").toggleClass("filter-selected");
       }
     });
-    if (!applyStyling) $(".style-box").removeClass("filter-selected")
+    if (!applyStyling) $(".style-box").removeClass("filter-selected");
   }
 
   // Change the selected game dataset

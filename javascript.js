@@ -9,14 +9,9 @@ jQuery(document).ready(function ($) {
     type: "GET",
     url: "answers.json",
     success: function (response) {
-      console.log(response);
       let answers = response.words;
       shuffle(answers);
-      console.log(answers);
       $(answers).each(function (index, data) {
-        console.log(data);
-        console.log(data.season);
-        console.log(data.word);
         $(".possible-answers").append(
           $(
             `<div class="answer-option" data-season="${data.season}">${data.word}</div>`
@@ -27,9 +22,6 @@ jQuery(document).ready(function ($) {
   });
 
   //        ---- EVENTS ----
-
-  // Deprecated
-  //$(".answer-option").on("mousedown", StickElement);
 
   //- ANSWER BOX EVENTS -
 
@@ -61,7 +53,6 @@ jQuery(document).ready(function ($) {
   $(".answer-box").on("wheel", function (e) {
     e.preventDefault();
     this.scrollLeft += e.originalEvent.wheelDeltaY;
-    console.log(e.originalEvent.wheelDeltaY);
   });
 
   //- ACTIONS EVENTS -
@@ -108,7 +99,7 @@ jQuery(document).ready(function ($) {
 
   // CHANGE THEMES
 
-  $(".theme-container").on("change", function() {
+  $(".theme-container").on("change", function () {
     if ($(this).find(":selected").val() === "Theme-2") {
       $("body").get(0).style.setProperty("--primary", "rgb(63, 207, 152)");
       $("body").get(0).style.setProperty("--secondary", "rgb(81, 246, 152)");
@@ -118,7 +109,7 @@ jQuery(document).ready(function ($) {
       $("body").get(0).style.setProperty("--secondary", "rgb(230, 172, 96)");
       $("body").get(0).style.setProperty("--highlight", "rgb(248, 243, 199)");
     }
-  })
+  });
 
   //        ---- FUNCTIONS ----
 

@@ -226,14 +226,6 @@ option {
 .game-name {
   font-weight: 900;
   font-size: 1.5rem;
-
-  /* width: 200px;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  display: inline-block;
-  margin: 0; */
 }
 
 .game-info-holder {
@@ -294,7 +286,7 @@ footer {
     margin: 0;
   }
   .game-container {
-    padding: .25rem;
+    padding: 0.25rem;
   }
 
   .filter-options {
