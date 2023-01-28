@@ -10,7 +10,7 @@ jQuery(document).ready(function ($) {
     url: "answers.json",
     success: function (response) {
       let answers = response.words;
-      shuffle(answers);
+      Shuffle(answers);
       $(answers).each(function (index, data) {
         $(".possible-answers").append(
           $(
@@ -152,7 +152,7 @@ jQuery(document).ready(function ($) {
   }
 
   // Shuffle Array
-  function shuffle(array) {
+  function Shuffle(array) {
     let currentIndex = array.length,
       randomIndex;
 

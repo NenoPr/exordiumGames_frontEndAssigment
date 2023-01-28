@@ -24,11 +24,11 @@ jQuery(document).ready(function ($) {
           return self.indexOf(value) === index;
         };
         // Remove duplicate names
-        const uniqueGenres = responseGenres.filter(unique);
-        const uniqueStyles = responseStyles.filter(unique);
+        const UNIQUE_GENRES = responseGenres.filter(unique);
+        const UNIQUE_STYLES = responseStyles.filter(unique);
         // Populate the DOM with genre and style data
-        SortResponseData(uniqueGenres, "genre");
-        SortResponseData(uniqueStyles, "style");
+        SortResponseData(UNIQUE_GENRES, "genre");
+        SortResponseData(UNIQUE_STYLES, "style");
         // Populate the games container with games from the dataset
         PopulateGames(responseData);
         // Empty the element to append new children
@@ -121,9 +121,7 @@ jQuery(document).ready(function ($) {
 
   function EnterKeySearch(e) {
     if (e.key === "Enter") {
-      // Cancel the default action, if needed
       e.preventDefault();
-      // Trigger the button element with a click
       $(".search-button").click();
     }
   }
@@ -167,29 +165,36 @@ jQuery(document).ready(function ($) {
   function ShowGenreCheckboxes() {
     var checkboxes = $("#genre-checkboxes");
     if (!genreExpanded) {
+      // If document has no event
       if ($._data(document.querySelector("body"), "events") === undefined) {
-        $("body").on("click", bodyGenreCheckboxToggle);
+        $("body").on("click", BodyGenreCheckboxToggle);
+        // Shows the list of genres
         checkboxes.css("display", "flex");
         genreExpanded = true;
+        // Closes the styles list
         $("#style-checkboxes").css("display", "none");
         styleExpanded = false;
       } else {
+        // if it has an event a specific event is disabled and another enabled
         $._data(document.querySelector("body"), "events").click.forEach(
           (element) => {
-            if (element.handler.name === "bodyStyleCheckboxToggle") {
-              $("body").off("click", bodyStyleCheckboxToggle);
+            if (element.handler.name === "BodyStyleCheckboxToggle") {
+              $("body").off("click", BodyStyleCheckboxToggle);
             }
-            $("body").on("click", bodyGenreCheckboxToggle);
+            $("body").on("click", BodyGenreCheckboxToggle);
+            // Shows the list of genres
             checkboxes.css("display", "flex");
             genreExpanded = true;
+            // Closes the styles list
             $("#style-checkboxes").css("display", "none");
             styleExpanded = false;
           }
         );
       }
     } else {
+      // Close the genres list if the user clicks on the elsewhere document
       checkboxes.css("display", "none");
-      $("body").off("click", bodyGenreCheckboxToggle);
+      $("body").off("click", BodyGenreCheckboxToggle);
       genreExpanded = false;
     }
     // Apply styling if a filter are selected
@@ -205,27 +210,27 @@ jQuery(document).ready(function ($) {
   }
 
   // Toggles the body event that closes the genre list if a user clicks outside of it
-  function bodyGenreCheckboxToggle(e) {
+  function BodyGenreCheckboxToggle(e) {
     if ($(e.target).hasClass("genre-box")) return;
     else if ($(e.target).hasClass("genre-checkbox")) return;
     else if ($(e.target).hasClass("checkbox-label")) return;
     else if ($(e.target).hasClass("checkbox")) return;
     else {
       $("#genre-checkboxes").css("display", "none");
-      $("body").off("click", bodyGenreCheckboxToggle);
+      $("body").off("click", BodyGenreCheckboxToggle);
       genreExpanded = false;
       return;
     }
   }
 
   // Toggles the body event that closes the style list if a user clicks outside of it
-  function bodyStyleCheckboxToggle(e) {
+  function BodyStyleCheckboxToggle(e) {
     if ($(e.target).hasClass("style-box")) return;
     else if ($(e.target).hasClass("style-checkbox")) return;
     else if ($(e.target).hasClass("checkbox")) return;
     else {
       $("#style-checkboxes").css("display", "none");
-      $("body").off("click", bodyStyleCheckboxToggle);
+      $("body").off("click", BodyStyleCheckboxToggle);
       styleExpanded = false;
       return;
     }
@@ -236,7 +241,7 @@ jQuery(document).ready(function ($) {
     let checkboxes = $("#style-checkboxes");
     if (!styleExpanded) {
       if ($._data(document.querySelector("body"), "events") === undefined) {
-        $("body").on("click", bodyStyleCheckboxToggle);
+        $("body").on("click", BodyStyleCheckboxToggle);
         checkboxes.css("display", "flex");
         styleExpanded = true;
         $("#genre-checkboxes").css("display", "none");
@@ -244,10 +249,10 @@ jQuery(document).ready(function ($) {
       } else {
         $._data(document.querySelector("body"), "events").click.forEach(
           (element) => {
-            if (element.handler.name === "bodyGenreCheckboxToggle") {
-              $("body").off("click", bodyGenreCheckboxToggle);
+            if (element.handler.name === "BodyGenreCheckboxToggle") {
+              $("body").off("click", BodyGenreCheckboxToggle);
             }
-            $("body").on("click", bodyStyleCheckboxToggle);
+            $("body").on("click", BodyStyleCheckboxToggle);
             checkboxes.css("display", "flex");
             styleExpanded = true;
             $("#genre-checkboxes").css("display", "none");
