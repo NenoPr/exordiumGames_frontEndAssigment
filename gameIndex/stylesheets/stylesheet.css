@@ -2,7 +2,7 @@
 
 @font-face {
   font-family: "CustomFont";
-  src: url("/public/fonts/AquireBold-8Ma60.otf") format("opentype");
+  src: url("/gameIndex/public/fonts/AquireBold-8Ma60.otf") format("opentype");
 }
 body {
   padding: 0;
