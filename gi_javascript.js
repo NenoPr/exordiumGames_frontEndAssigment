@@ -6,17 +6,18 @@ jQuery(document).ready(function ($) {
   let responseData;
   GetDataset("https://exordiumgames.com/jobs/frontend/dataset_1.json");
 
+  // GET dataset json
   function GetDataset(datasetUrl) {
     $.ajax({
       type: "GET",
       url: datasetUrl,
       success: function (response) {
-        console.log(response);
+        // console.log(response);
         responseData = response;
         let responseGenres = [];
         let responseStyles = [];
-        // push genres and styles to new array
-        $.each(response, function (key, val) {
+        // Push genres and styles to new array
+        $.each(responseData, function (key, val) {
           responseGenres.push(val.genre);
           responseStyles.push(val.style);
         });
@@ -30,7 +31,7 @@ jQuery(document).ready(function ($) {
         SortResponseData(uniqueGenres, "genre");
         SortResponseData(uniqueStyles, "style");
         // Populate the games container with games from the dataset
-        PopulateGames(response);
+        PopulateGames(responseData);
         // Empty the element to append new children
       },
     });
@@ -42,47 +43,149 @@ jQuery(document).ready(function ($) {
     // Populate the specified element
     $.each(data, function (index, val) {
       $(`#${type}-checkboxes`).append(
-        `<label for="${type}-${index}" class="checkbox-label">
+        `<label for="${type}-${index}" class="checkbox-label" data-${type}="${val}">
         ${val} <input type="checkbox" class="${type}-checkbox checkbox" id="${type}-${index}" />
             </label>`
       );
     });
   }
 
-  function PopulateGames(gamesData) {
+  function PopulateGames(rData, fData) {
     // Empty the element to append new children
     $(".games-container").empty();
+
     // Populate .games-container with new games
-    $.each(gamesData, function (key, val) {
-      $(".games-container").append(
-        `<div class="game-container">
-            <img class="game-image-url" src="https://exordiumgames.com/jobs/frontend/${val.url}"/>
-            <div class="game-info">
-              <div class="game-name">${key}</div>
-              <div class="game-info-holder">
-                <div class="game-info-type">Genre:</div>
-                <div class="game-genre"> ${val.genre}</div>
-              </div>
-              <div class="game-info-holder">
-                <div class="game-info-type">Style:</div>
-                <div class="game-style">${val.style}</div>
-              </div>
-            </div>
-          </div>`
-      );
+    $.each(rData, function (key, val) {
+      // Filter the game if filter is provided
+      if (fData) {
+        // Check if a game name includes search term
+        if (fData.searchTerm !== "") {
+          let filterName = true;
+          if (!key.toLowerCase().includes(fData.searchTerm.toLowerCase()))
+            return;
+          else filterName = false;
+        }
+
+        // Check if the game contains the selected genre
+        if (fData.genres.length > 0) {
+          let filterGenre = true;
+          $.each(fData.genres, function (index, genre) {
+            if (val.genre === genre) filterGenre = false;
+          });
+          if (filterGenre) return;
+        }
+
+        // Check if the game contains the selected styles
+        if (fData.styles.length > 0) {
+          let filterStyle = true;
+          $.each(fData.styles, function (index, style) {
+            if (val.style === style) filterStyle = false;
+          });
+          if (filterStyle) return;
+        }
+        PopulateGameToDOM(key, val);
+      } else {
+        PopulateGameToDOM(key, val);
+      }
     });
   }
 
+  function PopulateGameToDOM(key, val) {
+    // Populate game to DOM
+    $(".games-container").append(
+      `<div class="game-container">
+          <img class="game-image-url" src="https://exordiumgames.com/jobs/frontend/${val.url}"/>
+          <div class="game-info">
+            <div class="game-name">${key}</div>
+            <div class="game-info-holder">
+              <div class="game-info-type">Genre:</div>
+              <div class="game-genre"> ${val.genre}</div>
+            </div>
+            <div class="game-info-holder">
+              <div class="game-info-type">Style:</div>
+              <div class="game-style">${val.style}</div>
+            </div>
+          </div>
+        </div>`
+    );
+  }
+
+  // function ApplyFilter(rData, fData) {
+  //   // Empty the element to append new children
+  //   $(".games-container").empty();
+  //   // Populate .games-container with new games
+  //   $.each(rData, function (key, val) {
+  //     $(".games-container").append(
+  //       `<div class="game-container">
+  //           <img class="game-image-url" src="https://exordiumgames.com/jobs/frontend/${val.url}"/>
+  //           <div class="game-info">
+  //             <div class="game-name">${key}</div>
+  //             <div class="game-info-holder">
+  //               <div class="game-info-type">Genre:</div>
+  //               <div class="game-genre"> ${val.genre}</div>
+  //             </div>
+  //             <div class="game-info-holder">
+  //               <div class="game-info-type">Style:</div>
+  //               <div class="game-style">${val.style}</div>
+  //             </div>
+  //           </div>
+  //         </div>`
+  //     );
+  //   });
+  // }
+
   //              ---- EVENTS ----
+
   // Search checkboxes events
   // creates a vertical list of genres on click
   $(".genre-box-container").on("click", ShowGenreCheckboxes);
   $(".style-box-container").on("click", ShowStyleCheckboxes);
   $(".reset-filters").on("click", ResetFilters);
+  $(".search-button").on("click", SearchFilter);
+  $(".search-box").on("keypress", EnterKeySearch);
 
-  function ResetFilters() {
+  function EnterKeySearch(e) {
+    if (e.key === "Enter") {
+      // Cancel the default action, if needed
+      e.preventDefault();
+      // Trigger the button element with a click
+      $(".search-button").click();
+    }
+  }
+
+  function SearchFilter() {
+    let searchTerm = $(".search-box").val();
+    let genres = [];
+    let styles = [];
+    $(".genre-checkbox").each(function () {
+      if ($(this).is(":checked")) {
+        genres.push($(this).parent().data("genre"));
+      }
+    });
+    $(".style-checkbox").each(function (e) {
+      if ($(this).is(":checked")) {
+        styles.push($(this).parent().data("style"));
+      }
+    });
+
+    let filteredData = { searchTerm, genres, styles };
+    PopulateGames(responseData, filteredData);
+    if ($(".games-container").children().length === 0) {
+      $(".games-container").append(
+        `<div>Your query did not match any results...</div>`
+      );
+    }
+
+    $(".search-box").val("");
+  }
+
+  // Reset search filters
+  function ResetFilters(fullReset = true) {
     $("input:checkbox").prop("checked", false);
     $("input:text").val("");
+    $(".genre-box").removeClass("filter-selected");
+    $(".style-box").removeClass("filter-selected");
+    if (fullReset) PopulateGames(responseData);
   }
 
   // Displays the list of genres
@@ -95,7 +198,7 @@ jQuery(document).ready(function ($) {
         genreExpanded = true;
         $("#style-checkboxes").css("display", "none");
         styleExpanded = false;
-        console.log($._data(document.querySelector("body"), "events"));
+        // console.log($._data(document.querySelector("body"), "events"));
       } else {
         $._data(document.querySelector("body"), "events").click.forEach(
           (element) => {
@@ -115,11 +218,21 @@ jQuery(document).ready(function ($) {
       $("body").off("click", bodyGenreCheckboxToggle);
       genreExpanded = false;
     }
+    // Apply styling if a filter are selected
+    let applyStyling = false;
+    $(".genre-checkbox").each(function () {
+      if ($(this).is(":checked")) {
+        applyStyling = true
+        if (!$(".genre-box").hasClass("filter-selected"))
+          $(".genre-box").toggleClass("filter-selected");
+      }
+    });
+    if (!applyStyling) $(".genre-box").removeClass("filter-selected")
   }
 
   // Toggles the body event that closes the genre list if a user clicks outside of it
   function bodyGenreCheckboxToggle(e) {
-    console.log(e.target);
+    // console.log(e.target);
     if ($(e.target).hasClass("genre-box")) return;
     else if ($(e.target).hasClass("genre-checkbox")) return;
     else if ($(e.target).hasClass("checkbox-label")) return;
@@ -155,7 +268,7 @@ jQuery(document).ready(function ($) {
         styleExpanded = true;
         $("#genre-checkboxes").css("display", "none");
         genreExpanded = false;
-        console.log($._data(document.querySelector("body"), "events"));
+        // console.log($._data(document.querySelector("body"), "events"));
       } else {
         $._data(document.querySelector("body"), "events").click.forEach(
           (element) => {
@@ -175,13 +288,25 @@ jQuery(document).ready(function ($) {
       $("body").off("click", ShowStyleCheckboxes);
       styleExpanded = false;
     }
+    // Apply styling if a filter are selected
+    let applyStyling = false;
+    $(".style-checkbox").each(function () {
+      if ($(this).is(":checked")) {
+        applyStyling = true
+        if (!$(".style-box").hasClass("filter-selected"))
+          $(".style-box").toggleClass("filter-selected");
+      }
+    });
+    if (!applyStyling) $(".style-box").removeClass("filter-selected")
   }
 
   // Change the selected game dataset
   $(".dataset-select").on("change", function () {
     if ($(this).find(":selected").val() === "dataset2") {
+      ResetFilters(false);
       GetDataset("https://exordiumgames.com/jobs/frontend/dataset_2.json");
     } else {
+      ResetFilters(false);
       GetDataset("https://exordiumgames.com/jobs/frontend/dataset_1.json");
     }
   });

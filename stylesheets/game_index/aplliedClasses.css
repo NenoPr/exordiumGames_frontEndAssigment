@@ -1,0 +1,5 @@
+.filter-selected {
+    border-color: blue;
+    background-color: rgba(53, 112, 167, 0.8);
+    color: white;
+}
