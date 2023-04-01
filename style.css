@@ -1,0 +1,82 @@
+body {
+    margin: 0;
+    padding: 0;
+}
+
+.main-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-image: url("/seasons/public/images/spring.jpg");
+    min-height: 100vh;
+}
+
+.seasons-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+}
+
+.seasons-image {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-image: url("/seasons/public/images/summer.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    padding: 5rem;
+    border: .1rem solid white;
+    border-radius: .5rem;
+    cursor: pointer;
+    transition: transform .2s, box-shadow .2s;
+    width: 10rem;
+}
+
+.seasons-image:hover {
+    transform: scale(1.1);
+    box-shadow: 1rem 1rem 1rem gray;
+}
+
+.gameIndex-image-1 {
+    background-image: url("gameIndex/public/img/game_pattern.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    cursor: pointer;
+    transition: transform .2s, box-shadow .2s;
+}
+
+.gameIndex-image-2 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-image: url("gameIndex/public/img/game10.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    padding: 5rem;
+    border: .1rem solid white;
+    border-radius: .5rem;
+    width: 10rem;
+}
+
+.gameIndex-image-1:hover {
+    transform: scale(1.1);
+    box-shadow: 1rem 1rem 1rem gray;
+}
+
+.project-link {
+    font-size: 1.5rem;
+    font-weight: bold;
+    background-color: rgb(255, 255, 255);
+    border-radius: .25rem;
+    padding-left: .25rem;
+    padding-right: .25rem;
+}
+
+a {
+    text-decoration: none;
+    color: black;
+}

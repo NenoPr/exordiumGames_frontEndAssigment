@@ -1,0 +1,44 @@
+I have used a "Live Server" plugin through VS code for development.
+
+To best run the html files, a live server is required to be opened in the root folder, 
+then clicking on the folders "season" or "gameIndex" will launch their respective index.html files. 
+
+Opening the html.file by itself will not work on the seasons index.html file due to the CORS policy blocking the local path GET requests.
+
+
+
+The required Files are as follows:
+
+For The Seasons:
+/seasons
+	/public
+		/images
+			spring.jpg			
+			summer.jpg
+			autumn.jpg
+			winter.jpg
+			favicon.png
+		/models_3D
+			Lowpoly_tree_sample.glb
+	/stylesheets
+		images.css
+		scroll.css
+		stylesheet.css	
+	answers.json
+	index.html
+	javascript.js
+	jquery-3.6.1.min.js
+
+
+For the gameIndex:
+/gameIndex
+	/public
+		/fonts
+			AquireBold-8Ma60.otf
+	/stylesheets
+		aplliedClasses.css
+		stylesheet.css
+	index.html
+	javascript.js
+	jquery-3.6.1.min.js
+	
