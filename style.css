@@ -7,7 +7,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    background-image: url("/seasons/public/images/spring.jpg");
+    background-image: url("seasons/public/images/spring.jpg");
     min-height: 100vh;
 }
 
@@ -22,7 +22,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    background-image: url("/seasons/public/images/summer.jpg");
+    background-image: url("seasons/public/images/summer.jpg");
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
