@@ -45,6 +45,7 @@ body {
     background-repeat: no-repeat;
     background-position: center;
     cursor: pointer;
+    border-radius: .5rem;
     transition: transform .2s, box-shadow .2s;
 }
 
